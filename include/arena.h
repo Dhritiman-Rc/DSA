@@ -15,7 +15,7 @@
  *
  * @ *alc: Stored adress returned from malloc()
  * @ *cp: Current pointer
- * @ *next: Next pointer in the array 
+ * @ *next: Next pointer in the chhain of the main allocations 
  * @ size: Size of the allocation
  * */
 typedef struct {
@@ -44,7 +44,7 @@ typedef struct {
  * */
 int arena_alloc(arena *arena) {
 	arena->alc=malloc(arena->size);
-	arena->current = arena->alc;
+	arena->cp = arena->alc;
 	return 0;
 }
 
@@ -58,30 +58,35 @@ int arena_alloc(arena *arena) {
  *
  * */
 int arena_new_chunk(arena *arena, chunk *chunk, size_t size) {
-	if((char*)arena->current + size >= (char*)arena->alc + arena->size) {
+	if((char*)arena->cp + size >= (char*)arena->alc + arena->size) {
 		printf("Creating new arena!, no space left in current.");
+
 		return 20;
 	}
+
+	chunk->alc = arena->cp;
+	chunk->cp  = chunk->alc;
+
+	arena->cp = (char*)arena->cp + size;
 	return 0;
 }
 
 /* @type: function
- * @breif: free the arena, if there is allocation recursivley, free them.
- *
- *
+ * @breif: free the arena, if there is an allocation 
  * */
 int arena_free(arena *arena) {
-	if(arena->alc == NULL || arena->current == NULL) {
+	if(arena->alc == NULL || arena->cp == NULL) {
 		printf("Memory arena freed OR CORRUPTED DO NOT REUSE ARENA INSTANCE! \n");
 	}
 
 	if(arena->next != NULL) {
+		pritf("There are ma");
 		arena_free(arena->next);
 	}
 
 	free(arena->alc);
 	arena->alc = NULL;
-	arena->current = NULL;
+	arena->cp = NULL;
 	return 0;
 }
 
