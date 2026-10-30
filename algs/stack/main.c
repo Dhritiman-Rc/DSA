@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+#define LESS_THAN_BASE -11111111 
+
 typedef struct {
 	int *arr;
 	int ci;  // Current index.
@@ -16,25 +19,36 @@ void stck_push(stck *stck, int elem, int size) {
 	return;
 } 
 
+int stck_pop(stck *stck) {
+	
+	switch(stck->ci) {
+		case 0:
+			printf("Nothing to POP!\n");
+			return -11111111;
+		default:
+			break;
+	}
+		
+	stck->ci--;
+	int elem = stck->arr[stck->ci];
+
+	return elem;
+}
+
+int peek(stck *stck) {
+	if(stck->ci == 0) {
+		return LESS_THAN_BASE;
+	}
+	return stck->arr[stck->ci-1];
+}
+
 int main() {
+	int size = 5;
 	stck stck_1 = {
-		.arr = calloc(5, sizeof(int)),
+		.arr = malloc(sizeof(int) * size),
 		.ci = 0,
 	};
 
-
-	stck_push(&stck_1, 4, 5);
-	stck_push(&stck_1, 5, 5);
-	stck_push(&stck_1, 6, 5);
-
-	
-	printf("%d", stck_1.arr[0]);
-
-	printf("%d", stck_1.arr[1]);
-
-	printf("%d", stck_1.arr[2]);
-
-	printf("%d", stck_1.arr[3]);
 
 	free(stck_1.arr);
 }
