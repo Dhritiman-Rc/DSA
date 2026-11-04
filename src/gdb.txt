@@ -1,0 +1,322 @@
+
+a.out:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+0000000000001000 <_init>:
+    1000:	f3 0f 1e fa          	endbr64
+    1004:	48 83 ec 08          	sub    $0x8,%rsp
+    1008:	48 8b 05 c1 2f 00 00 	mov    0x2fc1(%rip),%rax        # 3fd0 <__gmon_start__>
+    100f:	48 85 c0             	test   %rax,%rax
+    1012:	74 02                	je     1016 <_init+0x16>
+    1014:	ff d0                	call   *%rax
+    1016:	48 83 c4 08          	add    $0x8,%rsp
+    101a:	c3                   	ret
+
+Disassembly of section .plt:
+
+0000000000001020 <__stack_chk_fail@plt-0x10>:
+    1020:	ff 35 ca 2f 00 00    	push   0x2fca(%rip)        # 3ff0 <_GLOBAL_OFFSET_TABLE_+0x8>
+    1026:	ff 25 cc 2f 00 00    	jmp    *0x2fcc(%rip)        # 3ff8 <_GLOBAL_OFFSET_TABLE_+0x10>
+    102c:	0f 1f 40 00          	nopl   0x0(%rax)
+
+0000000000001030 <__stack_chk_fail@plt>:
+    1030:	ff 25 ca 2f 00 00    	jmp    *0x2fca(%rip)        # 4000 <__stack_chk_fail@GLIBC_2.4>
+    1036:	68 00 00 00 00       	push   $0x0
+    103b:	e9 e0 ff ff ff       	jmp    1020 <_init+0x20>
+
+0000000000001040 <printf@plt>:
+    1040:	ff 25 c2 2f 00 00    	jmp    *0x2fc2(%rip)        # 4008 <printf@GLIBC_2.2.5>
+    1046:	68 01 00 00 00       	push   $0x1
+    104b:	e9 d0 ff ff ff       	jmp    1020 <_init+0x20>
+
+Disassembly of section .text:
+
+0000000000001050 <_start>:
+    1050:	f3 0f 1e fa          	endbr64
+    1054:	31 ed                	xor    %ebp,%ebp
+    1056:	49 89 d1             	mov    %rdx,%r9
+    1059:	5e                   	pop    %rsi
+    105a:	48 89 e2             	mov    %rsp,%rdx
+    105d:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+    1061:	50                   	push   %rax
+    1062:	54                   	push   %rsp
+    1063:	45 31 c0             	xor    %r8d,%r8d
+    1066:	31 c9                	xor    %ecx,%ecx
+    1068:	48 8d 3d f5 02 00 00 	lea    0x2f5(%rip),%rdi        # 1364 <main>
+    106f:	ff 15 4b 2f 00 00    	call   *0x2f4b(%rip)        # 3fc0 <__libc_start_main@GLIBC_2.34>
+    1075:	f4                   	hlt
+    1076:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+    107d:	00 00 00 
+
+0000000000001080 <deregister_tm_clones>:
+    1080:	48 8d 3d 99 2f 00 00 	lea    0x2f99(%rip),%rdi        # 4020 <__TMC_END__>
+    1087:	48 8d 05 92 2f 00 00 	lea    0x2f92(%rip),%rax        # 4020 <__TMC_END__>
+    108e:	48 39 f8             	cmp    %rdi,%rax
+    1091:	74 15                	je     10a8 <deregister_tm_clones+0x28>
+    1093:	48 8b 05 2e 2f 00 00 	mov    0x2f2e(%rip),%rax        # 3fc8 <_ITM_deregisterTMCloneTable>
+    109a:	48 85 c0             	test   %rax,%rax
+    109d:	74 09                	je     10a8 <deregister_tm_clones+0x28>
+    109f:	ff e0                	jmp    *%rax
+    10a1:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+    10a8:	c3                   	ret
+    10a9:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+00000000000010b0 <register_tm_clones>:
+    10b0:	48 8d 3d 69 2f 00 00 	lea    0x2f69(%rip),%rdi        # 4020 <__TMC_END__>
+    10b7:	48 8d 35 62 2f 00 00 	lea    0x2f62(%rip),%rsi        # 4020 <__TMC_END__>
+    10be:	48 29 fe             	sub    %rdi,%rsi
+    10c1:	48 89 f0             	mov    %rsi,%rax
+    10c4:	48 c1 ee 3f          	shr    $0x3f,%rsi
+    10c8:	48 c1 f8 03          	sar    $0x3,%rax
+    10cc:	48 01 c6             	add    %rax,%rsi
+    10cf:	48 d1 fe             	sar    $1,%rsi
+    10d2:	74 14                	je     10e8 <register_tm_clones+0x38>
+    10d4:	48 8b 05 fd 2e 00 00 	mov    0x2efd(%rip),%rax        # 3fd8 <_ITM_registerTMCloneTable>
+    10db:	48 85 c0             	test   %rax,%rax
+    10de:	74 08                	je     10e8 <register_tm_clones+0x38>
+    10e0:	ff e0                	jmp    *%rax
+    10e2:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+    10e8:	c3                   	ret
+    10e9:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+00000000000010f0 <__do_global_dtors_aux>:
+    10f0:	f3 0f 1e fa          	endbr64
+    10f4:	80 3d 25 2f 00 00 00 	cmpb   $0x0,0x2f25(%rip)        # 4020 <__TMC_END__>
+    10fb:	75 33                	jne    1130 <__do_global_dtors_aux+0x40>
+    10fd:	55                   	push   %rbp
+    10fe:	48 83 3d da 2e 00 00 	cmpq   $0x0,0x2eda(%rip)        # 3fe0 <__cxa_finalize@GLIBC_2.2.5>
+    1105:	00 
+    1106:	48 89 e5             	mov    %rsp,%rbp
+    1109:	74 0d                	je     1118 <__do_global_dtors_aux+0x28>
+    110b:	48 8b 3d 06 2f 00 00 	mov    0x2f06(%rip),%rdi        # 4018 <__dso_handle>
+    1112:	ff 15 c8 2e 00 00    	call   *0x2ec8(%rip)        # 3fe0 <__cxa_finalize@GLIBC_2.2.5>
+    1118:	e8 63 ff ff ff       	call   1080 <deregister_tm_clones>
+    111d:	c6 05 fc 2e 00 00 01 	movb   $0x1,0x2efc(%rip)        # 4020 <__TMC_END__>
+    1124:	5d                   	pop    %rbp
+    1125:	c3                   	ret
+    1126:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+    112d:	00 00 00 
+    1130:	c3                   	ret
+    1131:	0f 1f 40 00          	nopl   0x0(%rax)
+    1135:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+    113c:	00 00 00 00 
+
+0000000000001140 <frame_dummy>:
+    1140:	f3 0f 1e fa          	endbr64
+    1144:	e9 67 ff ff ff       	jmp    10b0 <register_tm_clones>
+
+0000000000001149 <swap>:
+    1149:	55                   	push   %rbp
+    114a:	48 89 e5             	mov    %rsp,%rbp
+    114d:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+    1151:	48 89 75 f0          	mov    %rsi,-0x10(%rbp)
+    1155:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+    1159:	0f b6 10             	movzbl (%rax),%edx
+    115c:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+    1160:	0f b6 00             	movzbl (%rax),%eax
+    1163:	31 c2                	xor    %eax,%edx
+    1165:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+    1169:	88 10                	mov    %dl,(%rax)
+    116b:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+    116f:	0f b6 10             	movzbl (%rax),%edx
+    1172:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+    1176:	0f b6 00             	movzbl (%rax),%eax
+    1179:	31 c2                	xor    %eax,%edx
+    117b:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+    117f:	88 10                	mov    %dl,(%rax)
+    1181:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+    1185:	0f b6 10             	movzbl (%rax),%edx
+    1188:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+    118c:	0f b6 00             	movzbl (%rax),%eax
+    118f:	31 c2                	xor    %eax,%edx
+    1191:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+    1195:	88 10                	mov    %dl,(%rax)
+    1197:	90                   	nop
+    1198:	5d                   	pop    %rbp
+    1199:	c3                   	ret
+
+000000000000119a <lk_is_vowel>:
+    119a:	55                   	push   %rbp
+    119b:	48 89 e5             	mov    %rsp,%rbp
+    119e:	40 88 7d ff          	mov    %dil,-0x1(%rbp)
+    11a2:	0f be 45 ff          	movsbl -0x1(%rbp),%eax
+    11a6:	83 f8 75             	cmp    $0x75,%eax
+    11a9:	0f 84 9b 00 00 00    	je     124a <lk_is_vowel+0xb0>
+    11af:	83 f8 75             	cmp    $0x75,%eax
+    11b2:	0f 8f a0 00 00 00    	jg     1258 <lk_is_vowel+0xbe>
+    11b8:	83 f8 6f             	cmp    $0x6f,%eax
+    11bb:	74 7f                	je     123c <lk_is_vowel+0xa2>
+    11bd:	83 f8 6f             	cmp    $0x6f,%eax
+    11c0:	0f 8f 92 00 00 00    	jg     1258 <lk_is_vowel+0xbe>
+    11c6:	83 f8 69             	cmp    $0x69,%eax
+    11c9:	74 63                	je     122e <lk_is_vowel+0x94>
+    11cb:	83 f8 69             	cmp    $0x69,%eax
+    11ce:	0f 8f 84 00 00 00    	jg     1258 <lk_is_vowel+0xbe>
+    11d4:	83 f8 65             	cmp    $0x65,%eax
+    11d7:	74 47                	je     1220 <lk_is_vowel+0x86>
+    11d9:	83 f8 65             	cmp    $0x65,%eax
+    11dc:	7f 7a                	jg     1258 <lk_is_vowel+0xbe>
+    11de:	83 f8 61             	cmp    $0x61,%eax
+    11e1:	74 2f                	je     1212 <lk_is_vowel+0x78>
+    11e3:	83 f8 61             	cmp    $0x61,%eax
+    11e6:	7f 70                	jg     1258 <lk_is_vowel+0xbe>
+    11e8:	83 f8 55             	cmp    $0x55,%eax
+    11eb:	74 64                	je     1251 <lk_is_vowel+0xb7>
+    11ed:	83 f8 55             	cmp    $0x55,%eax
+    11f0:	7f 66                	jg     1258 <lk_is_vowel+0xbe>
+    11f2:	83 f8 4f             	cmp    $0x4f,%eax
+    11f5:	74 4c                	je     1243 <lk_is_vowel+0xa9>
+    11f7:	83 f8 4f             	cmp    $0x4f,%eax
+    11fa:	7f 5c                	jg     1258 <lk_is_vowel+0xbe>
+    11fc:	83 f8 49             	cmp    $0x49,%eax
+    11ff:	74 34                	je     1235 <lk_is_vowel+0x9b>
+    1201:	83 f8 49             	cmp    $0x49,%eax
+    1204:	7f 52                	jg     1258 <lk_is_vowel+0xbe>
+    1206:	83 f8 41             	cmp    $0x41,%eax
+    1209:	74 0e                	je     1219 <lk_is_vowel+0x7f>
+    120b:	83 f8 45             	cmp    $0x45,%eax
+    120e:	74 17                	je     1227 <lk_is_vowel+0x8d>
+    1210:	eb 46                	jmp    1258 <lk_is_vowel+0xbe>
+    1212:	b8 01 00 00 00       	mov    $0x1,%eax
+    1217:	eb 44                	jmp    125d <lk_is_vowel+0xc3>
+    1219:	b8 01 00 00 00       	mov    $0x1,%eax
+    121e:	eb 3d                	jmp    125d <lk_is_vowel+0xc3>
+    1220:	b8 01 00 00 00       	mov    $0x1,%eax
+    1225:	eb 36                	jmp    125d <lk_is_vowel+0xc3>
+    1227:	b8 01 00 00 00       	mov    $0x1,%eax
+    122c:	eb 2f                	jmp    125d <lk_is_vowel+0xc3>
+    122e:	b8 01 00 00 00       	mov    $0x1,%eax
+    1233:	eb 28                	jmp    125d <lk_is_vowel+0xc3>
+    1235:	b8 01 00 00 00       	mov    $0x1,%eax
+    123a:	eb 21                	jmp    125d <lk_is_vowel+0xc3>
+    123c:	b8 01 00 00 00       	mov    $0x1,%eax
+    1241:	eb 1a                	jmp    125d <lk_is_vowel+0xc3>
+    1243:	b8 01 00 00 00       	mov    $0x1,%eax
+    1248:	eb 13                	jmp    125d <lk_is_vowel+0xc3>
+    124a:	b8 01 00 00 00       	mov    $0x1,%eax
+    124f:	eb 0c                	jmp    125d <lk_is_vowel+0xc3>
+    1251:	b8 01 00 00 00       	mov    $0x1,%eax
+    1256:	eb 05                	jmp    125d <lk_is_vowel+0xc3>
+    1258:	b8 00 00 00 00       	mov    $0x0,%eax
+    125d:	5d                   	pop    %rbp
+    125e:	c3                   	ret
+
+000000000000125f <reverseVowels>:
+    125f:	55                   	push   %rbp
+    1260:	48 89 e5             	mov    %rsp,%rbp
+    1263:	48 83 ec 18          	sub    $0x18,%rsp
+    1267:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+    126b:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%rbp)
+    1272:	eb 04                	jmp    1278 <reverseVowels+0x19>
+    1274:	83 45 f8 01          	addl   $0x1,-0x8(%rbp)
+    1278:	8b 45 f8             	mov    -0x8(%rbp),%eax
+    127b:	48 63 d0             	movslq %eax,%rdx
+    127e:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+    1282:	48 01 d0             	add    %rdx,%rax
+    1285:	0f b6 00             	movzbl (%rax),%eax
+    1288:	84 c0                	test   %al,%al
+    128a:	75 e8                	jne    1274 <reverseVowels+0x15>
+    128c:	83 6d f8 01          	subl   $0x1,-0x8(%rbp)
+    1290:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%rbp)
+    1297:	e9 b6 00 00 00       	jmp    1352 <reverseVowels+0xf3>
+    129c:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    129f:	48 63 d0             	movslq %eax,%rdx
+    12a2:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+    12a6:	48 01 d0             	add    %rdx,%rax
+    12a9:	0f b6 00             	movzbl (%rax),%eax
+    12ac:	0f be c0             	movsbl %al,%eax
+    12af:	89 c7                	mov    %eax,%edi
+    12b1:	e8 e4 fe ff ff       	call   119a <lk_is_vowel>
+    12b6:	83 f8 01             	cmp    $0x1,%eax
+    12b9:	74 09                	je     12c4 <reverseVowels+0x65>
+    12bb:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+    12bf:	e9 8e 00 00 00       	jmp    1352 <reverseVowels+0xf3>
+    12c4:	8b 45 f8             	mov    -0x8(%rbp),%eax
+    12c7:	48 63 d0             	movslq %eax,%rdx
+    12ca:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+    12ce:	48 01 d0             	add    %rdx,%rax
+    12d1:	0f b6 00             	movzbl (%rax),%eax
+    12d4:	0f be c0             	movsbl %al,%eax
+    12d7:	89 c7                	mov    %eax,%edi
+    12d9:	e8 bc fe ff ff       	call   119a <lk_is_vowel>
+    12de:	83 f8 01             	cmp    $0x1,%eax
+    12e1:	74 04                	je     12e7 <reverseVowels+0x88>
+    12e3:	83 6d f8 01          	subl   $0x1,-0x8(%rbp)
+    12e7:	8b 45 f8             	mov    -0x8(%rbp),%eax
+    12ea:	48 63 d0             	movslq %eax,%rdx
+    12ed:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+    12f1:	48 01 d0             	add    %rdx,%rax
+    12f4:	0f b6 00             	movzbl (%rax),%eax
+    12f7:	0f be c0             	movsbl %al,%eax
+    12fa:	89 c7                	mov    %eax,%edi
+    12fc:	e8 99 fe ff ff       	call   119a <lk_is_vowel>
+    1301:	83 f8 01             	cmp    $0x1,%eax
+    1304:	75 4c                	jne    1352 <reverseVowels+0xf3>
+    1306:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    1309:	48 63 d0             	movslq %eax,%rdx
+    130c:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+    1310:	48 01 d0             	add    %rdx,%rax
+    1313:	0f b6 00             	movzbl (%rax),%eax
+    1316:	0f be c0             	movsbl %al,%eax
+    1319:	89 c7                	mov    %eax,%edi
+    131b:	e8 7a fe ff ff       	call   119a <lk_is_vowel>
+    1320:	83 f8 01             	cmp    $0x1,%eax
+    1323:	75 2d                	jne    1352 <reverseVowels+0xf3>
+    1325:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    1328:	48 63 d0             	movslq %eax,%rdx
+    132b:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+    132f:	48 01 c2             	add    %rax,%rdx
+    1332:	8b 45 f8             	mov    -0x8(%rbp),%eax
+    1335:	48 63 c8             	movslq %eax,%rcx
+    1338:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+    133c:	48 01 c8             	add    %rcx,%rax
+    133f:	48 89 d6             	mov    %rdx,%rsi
+    1342:	48 89 c7             	mov    %rax,%rdi
+    1345:	e8 ff fd ff ff       	call   1149 <swap>
+    134a:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+    134e:	83 6d f8 01          	subl   $0x1,-0x8(%rbp)
+    1352:	8b 45 fc             	mov    -0x4(%rbp),%eax
+    1355:	3b 45 f8             	cmp    -0x8(%rbp),%eax
+    1358:	0f 8c 3e ff ff ff    	jl     129c <reverseVowels+0x3d>
+    135e:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+    1362:	c9                   	leave
+    1363:	c3                   	ret
+
+0000000000001364 <main>:
+    1364:	55                   	push   %rbp
+    1365:	48 89 e5             	mov    %rsp,%rbp
+    1368:	48 83 ec 20          	sub    $0x20,%rsp
+    136c:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+    1373:	00 00 
+    1375:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+    1379:	31 c0                	xor    %eax,%eax
+    137b:	66 c7 45 f5 61 2e    	movw   $0x2e61,-0xb(%rbp)
+    1381:	c6 45 f7 00          	movb   $0x0,-0x9(%rbp)
+    1385:	48 8d 45 f5          	lea    -0xb(%rbp),%rax
+    1389:	48 89 c7             	mov    %rax,%rdi
+    138c:	e8 ce fe ff ff       	call   125f <reverseVowels>
+    1391:	48 89 45 e8          	mov    %rax,-0x18(%rbp)
+    1395:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+    1399:	48 8d 15 64 0c 00 00 	lea    0xc64(%rip),%rdx        # 2004 <_IO_stdin_used+0x4>
+    13a0:	48 89 c6             	mov    %rax,%rsi
+    13a3:	48 89 d7             	mov    %rdx,%rdi
+    13a6:	b8 00 00 00 00       	mov    $0x0,%eax
+    13ab:	e8 90 fc ff ff       	call   1040 <printf@plt>
+    13b0:	b8 00 00 00 00       	mov    $0x0,%eax
+    13b5:	48 8b 55 f8          	mov    -0x8(%rbp),%rdx
+    13b9:	64 48 2b 14 25 28 00 	sub    %fs:0x28,%rdx
+    13c0:	00 00 
+    13c2:	74 05                	je     13c9 <main+0x65>
+    13c4:	e8 67 fc ff ff       	call   1030 <__stack_chk_fail@plt>
+    13c9:	c9                   	leave
+    13ca:	c3                   	ret
+
+Disassembly of section .fini:
+
+00000000000013cc <_fini>:
+    13cc:	f3 0f 1e fa          	endbr64
+    13d0:	48 83 ec 08          	sub    $0x8,%rsp
+    13d4:	48 83 c4 08          	add    $0x8,%rsp
+    13d8:	c3                   	ret
